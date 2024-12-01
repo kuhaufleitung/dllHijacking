@@ -1,0 +1,9 @@
+#pragma once
+//#pragma comment(linker,"/export:DllMain=C:\\Windows\\System32\\XInput1_4.DllMain,@1")
+#pragma comment(linker,"/export:XInputEnable=C:\\Windows\\System32\\XInput1_4.XInputEnable,@5")
+#pragma comment(linker,"/export:XInputGetAudioDeviceIds=C:\\Windows\\System32\\XInput1_4.XInputGetAudioDeviceIds,@10")
+#pragma comment(linker,"/export:XInputGetBatteryInformation=C:\\Windows\\System32\\XInput1_4.XInputGetBatteryInformation,@7")
+#pragma comment(linker,"/export:XInputGetCapabilities=C:\\Windows\\System32\\XInput1_4.XInputGetCapabilities,@4")
+#pragma comment(linker,"/export:XInputGetKeystroke=C:\\Windows\\System32\\XInput1_4.XInputGetKeystroke,@8")
+#pragma comment(linker,"/export:XInputGetState=C:\\Windows\\System32\\XInput1_4.XInputGetState,@2")
+#pragma comment(linker,"/export:XInputSetState=C:\\Windows\\System32\\XInput1_4.XInputSetState,@3")
