@@ -47,7 +47,6 @@ std::vector<DllInfo> GetLoadedDLLs(const std::wstring& processName)
 
     if (processId == 0)
     {
-        std::wcerr << L"Process not found: " << processName << std::endl;
         return dllList;
     }
 
@@ -221,24 +220,28 @@ int main()
     const std::wstring processName = L"VulnerableProgram.exe";
     std::wcout << L"Waiting for process " << processName << L" to start...\n" << std::endl;
     auto dlls = GetLoadedDLLs(processName);
-
+    bool isOpen = false;
     while (true)
     {
         const auto dlls = GetLoadedDLLs(processName);
 
         if (!dlls.empty())
         {
-            std::wcout << "Found following DLLs from " << processName << "..." << std::endl;
-
-            for (const auto& dll : dlls)
+            if (!isOpen)
             {
-                std::wcout << L"Name: " << dll.name << std::endl;
-                std::wcout << L"Path: " << dll.path << L"\n" << std::endl;
+                std::wcout << "Found following DLLs from " << processName << "..." << std::endl;
+                for (const auto& dll : dlls)
+                {
+                    std::wcout << L"Name: " << dll.name << std::endl;
+                    std::wcout << L"Path: " << dll.path << L"\n" << std::endl;
+                }
+				CheckAgainstDatabase(processName, dlls);
             }
-
-            CheckAgainstDatabase(processName, dlls);
-
-            break;
+            isOpen = true;
+        }
+        else
+        {
+            isOpen = false;
         }
 
         std::this_thread::sleep_for(std::chrono::milliseconds(500));
